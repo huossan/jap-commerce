@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,11 +10,23 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> <!--Se agrego para que funcionen los estilos del login-->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> <!--Se agrego para que funcionen los estilos del login-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!--Se agrego para que funcionen los estilos del login-->
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    html, body{
+  <link href="css/login.css" rel="stylesheet">
+  <!--<style>
+    .centrado {
+      text-align: center;
+    }
+
+    .error {
+      border: 3px solid red;
+    }
+
+    /*html, body{
       height: 100%;
     }
 
@@ -33,19 +45,47 @@
       max-width: 330px;
       padding: 15px;
       margin: auto;
-    }
-  </style>
+    }*/
+  </style>-->
 </head>
-
+<!--
 <body class="text-center">
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div id="login">
+    <h3 class="text-center text-white pt-5">Login form</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <div id="login-form" class="form" action="" method="post">
+                        <h3 class="text-center text-info">Login</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Usuario:</label><br>
+                            <input type="text" name="username" id="username" class="form-control centrado">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Contraseña:</label><br>
+                            <input type="password" name="password" id="password" class="form-control centrado">
+                        </div>
+                        <div class="form-group">
+                            <label for="remember-me" class="text-info"><span>Recordarme</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Entrar" onclick="logearse()">
+                        </div>
+                        <div id="register-link" class="text-right">
+                            <a href="#" class="text-info">Registrarse aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+-->
+<div class="box" action="index.html" method="post" id="contenedor">
+  <h1>Login</h1>
+  <input class="user" id="username" type="text" name="usuario" required placeholder="Usuario">
+  <input class="pass" id="password" type="password" name="clave" required placeholder="Contraseña">
+  <input type="submit" name="" value="Ingresar" onclick="logearse ()">
+</div>
 
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>

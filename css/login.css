@@ -1,0 +1,113 @@
+body {
+    margin: 0; /*Establece un margen hacia las 4 direcciones, entre esta 'caja' y otra */
+    padding: 0; /*Establece margen entre el contenido y el borde de la 'caja' */
+    font-family: sans-serif; /*Define la fuente a utilizarse en el texto */
+    /*background-color: #34495e;*/
+    background-image: url(../img/login.jpg); /*Coloca como fondo una imagen, en este caso la '3175994.jpg' */
+}
+
+.box {
+    width: 500px; /*Establece el ancho del elemento */
+    height: 300px; /*Establece la altura del elemento */
+    padding: 5px; /*Establece los margenes interiores del elemento (entre el elemento y el borde)*/
+    position: absolute; /*Indicamos que no se asigne espacio alguno para el elemento, determinando su posicion con 'top' 'left' 'right' y 'bottom' */
+    top: 50%; /*Indicamos que se coloce a la mitad de la distacia a 'top' */
+    left: 50%; /*Indicamos que se coloce a la mitad de la distacia a 'left' */
+    transform: translate(-50%,-50%);
+    background: #191919A6;
+    /*background: none;*/
+    text-align: center; /*Alinea el texto en el centro */
+    border: 2px solid #3498db; /*Da un espesor solido al borde, y se le asigna un color */
+    border-radius: 30px; /*Los angulos tienen la circunsferencia correspondiente al radio establecido */
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+}
+/*
+.box input[type = "text"],.box input[type = "password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+*/
+.user,.pass{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+/*
+.pass {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+*/
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
+}
+
+.box input[type = "submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box input[type = "submit"]:hover {
+    background: #2ecc71;
+}
+
+.error {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 4px solid red;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
