@@ -97,6 +97,11 @@ body {
     background: #2ecc71;
 }
 
+.box input[type = "submit"]:focus {
+    background: #2ecc71;
+}
+
+
 .error {
     border: 0;
     background: none;
