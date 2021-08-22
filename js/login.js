@@ -34,17 +34,17 @@ function logearse () {
     mostraremos un cartel de alerta y agregaremos una clase de estilo 'error'*/  
     } else if(pass.value.trim() === "") {
         
-        alert("Ingrese Contraseña")
+        alert("Ingrese Contraseña");
         pass.classList.add('error');
     /*Si no, haremos la misma consulta pero para el campo de contraseña */
     } else {
         
         usuario.nombre = user.value;
-        usuario.estado = "conectado"
+        usuario.estado = "conectado";
 
-        location.href = "index.html"
+        location.href = "index.html";
 
-        localStorage.setItem('Usuario', JSON.stringify(usuario))
+        localStorage.setItem('Usuario', JSON.stringify(usuario));
     /*Si ninguna de las dos condiciones se cumplen, redireccionaremos a "index.html,
     almacenando como propiedad 'nombre' del objeto 'usuario' el datos ingresado
     y a la propiedad 'estado' le asignaremos el string "conectado".

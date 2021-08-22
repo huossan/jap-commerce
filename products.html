@@ -5,6 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+
+    <!-- OAuth de Google -->
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="994155209935-4he52dbd7l032cm2ou9s6q52ddr4ofjk.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- OAuth de Google -->
+
     <title>eMercado - Todo lo que busques está aquí</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
@@ -12,6 +19,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/product.css" rel="stylesheet">
   </head>
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -24,14 +32,71 @@
         <a class="py-2 d-none d-md-inline-block" href="login.html" onclick="logout ()">Salir</a>
       </div>
     </nav>
-    <div class="container p-5">
-      <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-        <h4 class="alert-heading">¡A trabajar! :)</h4>
-        <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 22/08/2021) y Entrega 2 (Fecha de entrega: 05/09/2021).</p>
-        <hr>
-        <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <main role="main" class="pb-5">
+      <div class="text-center p-4">
+          <h2>Productos</h2>
+          <p class="lead">Verás aquí todas los productos.</p>
       </div>
-    </div>
+      <div class="container">
+          <div class="row">
+              <div class="col text-right">
+                  <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                      <label class="btn btn-light active" id="sortAsc" >
+                          <input type="radio" name="options" autocomplete="off" checked>A-Z
+                      </label>
+                      <label class="btn btn-light" id="sortDesc" >
+                          <input type="radio" name="options" autocomplete="off">Z-A
+                      </label>
+                      <label class="btn btn-light" id="sortByCount" >
+                          <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Vend.
+                      </label>
+                  </div>
+              </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-md-6"></div>
+              <div class="col-md-6 col-sm-12 mb-1 container">
+                <div class="row container p-0 m-0">
+                  <div class="col">
+                    <p class="font-weight-normal text-right my-2">Cant.</p>
+                  </div>
+                  <div class="col">
+                    <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
+                  </div>
+                  <div class="col">
+                    <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
+                  </div>
+                  <div class="col-3 p-0">
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                      <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+            <div class="row">
+              <div class="contenedor" id="cat-list-container">
+              </div>
+            
+          </div>
+          <!-- <div class="row">
+              <div class="list-group" id="cat-list-container">
+              </div>
+          </div> -->
+      </div>
+  </main>
+    <!-- <main role="main" class="pb-5">
+      
+      En este div se va a ir agregando el fragmento de codigo html que defini 
+      en products.js como htmlContentToAppend
+      <div class="row">
+        <div class="list-group" id="cat-list-container">
+        </div>
+      </div>
+
+    </main> -->
     <footer class="text-muted bg-light">
       <div class="container">
         <p class="float-right">

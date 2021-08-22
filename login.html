@@ -6,6 +6,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  
+  <!-- OAuth de Google -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="994155209935-gpld311f56or3p52800kg1n7772il8a7.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="js/google.js"></script>
+  <!-- OAuth de Google -->
+
   <title>eMercado - Todo lo que busques está aquí</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
@@ -85,9 +93,17 @@
   <input class="user" id="username" type="text" name="usuario" required placeholder="Usuario">
   <input class="pass" id="password" type="password" name="clave" required placeholder="Contraseña">
   <input type="submit" name="" value="Ingresar" onclick="logearse ()">
+  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 </div>
-
+</script>
+  
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
 </body>
 </html>
+
+<!-- ID DE CLIENTE -->
+<!-- 994155209935-gpld311f56or3p52800kg1n7772il8a7.apps.googleusercontent.com -->
+
+<!-- CLIENTE SECRETO -->
+<!-- aSOr87kt-FXs9-nWuvtJk15V -->
