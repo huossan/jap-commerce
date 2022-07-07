@@ -1,168 +1,164 @@
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
-var currentCategoriesArray = [];
-var currentSortCriteria = undefined;
-var minCount = undefined;
-var maxCount = undefined;
+var productosArray = [];
+var listafiltrada = [];
 
-function sortCategories(criteria, array){
-    let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
-    {
-        result = array.sort(function(a, b) {
-            if ( a.name < b.name ){ return -1; }
-            if ( a.name > b.name ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_DESC_BY_NAME){
-        result = array.sort(function(a, b) {
-            if ( a.name > b.name ){ return -1; }
-            if ( a.name < b.name ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_BY_PROD_COUNT){
-        result = array.sort(function(a, b) {
-            let aCount = parseInt(a.productCount);
-            let bCount = parseInt(b.productCount);
-
-            if ( aCount > bCount ){ return -1; }
-            if ( aCount < bCount ){ return 1; }
-            return 0;
-        });
-    }
-
-    return result;
-}
-
-function showCategoriesList(){
+/****************RECORRE ARRAY TRAIDA DE JSON Y LA MUESTRA****************/
+function mostrarListaProd(arrayProd){
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
-        let producto = currentCategoriesArray[i];
+    for(let i = 0; i < arrayProd.length; i++){
+        let producto = arrayProd[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(producto.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(producto.productCount) <= maxCount))){
-
-            htmlContentToAppend += `
-            
-                <div class="card" onclick = "informacion ()">
+        // htmlContentToAppend += `
+        // <a href="product-info.html" class="">
+        //         <div class="card" onclick = "informacion ()">
+        //             <img src="` + producto.imgSrc + `" alt="` + producto.description + `">
+        //             <h4>`+ producto.name +`</h4>
+        //             <p>` + producto.description + `</p>
+        //             <small class="text-muted">` + producto.soldCount + ` vendidos</small><br>
+        //             <h4 class = "costo">`+ producto.currency +` `+ producto.cost +`</h4>                                    
+        //         </div></a>
+        //     `
+        htmlContentToAppend += `
+        <a href="product-info.html" class="">
+            <div class="card">
+                <div>
                     <img src="` + producto.imgSrc + `" alt="` + producto.description + `">
+                </div>
+                <div class="cont">
                     <h4>`+ producto.name +`</h4>
                     <p>` + producto.description + `</p>
-                    <small class="text-muted">` + producto.soldCount + ` vendidos</small><br>
-                    <h4 class = "costo">`+ producto.currency +` `+ producto.cost +`</h4>                                    
+                    <small class="text-muted">` + producto.soldCount + ` vendidos</small>
                 </div>
-            `
+                <div class="cost">
+
+                    <h4 class = "costo">`+ producto.currency +` `+ producto.cost +`</h4> 
+                </div>                                     
+            </div></a>
+        `
+        document.getElementById("cat-list-container").innerHTML = (htmlContentToAppend);   
+    };
+};
+
+/**************BUSCA EN TIEMPO REAL Y MUESTRA EL NUEVO ARRAY**************/
+function buscar () {
+    var texto = document.getElementById('filtro').value; // Declaramos una variable en donde se guardara el valor ingresado en el input con id 'filtro'
+    var listafiltrada = productosArray.filter(producto => { // Le ingresamos al array crerado como listafiltrada, los elementos de productosArray filtrados
+        return producto.name.toLowerCase().indexOf(texto.toLowerCase()) > -1;
+    });
+    
+    mostrarListaProd(listafiltrada);
+};
+
+/********************************** ORDENAR ******************************/
+function ordenarPorNombre () {
+    productosArray.reverse((a,b) => {
+        if (a.name > b.name) {
+            return 1;
+        } else if (a.name < b.name) {
+            return -1;
+        } else {
+            return 0;
         }
+    });
+    mostrarListaProd(productosArray);
+};
 
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
-    }
-}
+function ordenarPorRelevancia () {
+    productosArray.sort((a,b) => {
+        if (a.soldCount > b.soldCount) {
+            return 1;
+        } else if (a.soldCount < b.soldCount) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
+    mostrarListaProd(productosArray);
+};
 
-function informacion () {
-    location.href = ""
-}
+function ordenarPorCosto () {
+    productosArray.reverse(function(a,b) {
+        let costoA = parseInt(a.cost);
+        let costoB = parseInt(b.cost);
 
-// function showCategoriesList(){
+        return costoA - costoB;        
+    });
+    mostrarListaProd(productosArray);
+};
 
-//     let htmlContentToAppend = "";
-//     for(let i = 0; i < currentCategoriesArray.length; i++){
-//         let category = currentCategoriesArray[i];
 
-//         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-//             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
 
-//             htmlContentToAppend += `
-//             <a href="category-info.html" class="list-group-item list-group-item-action">
-//                 <div class="row">
-//                     <div class="col-3">
-//                         <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
-//                     </div>
-//                     <div class="col">
-//                         <div class="d-flex w-100 justify-content-between">
-//                             <h4 class="mb-1">`+ category.name +`</h4>
-//                             <small class="text-muted">` + category.soldCount + ` vendidos</small>
-//                         </div>
-//                         <p class="mb-1">` + category.description + `</p>
-//                     </div>
-//                 </div>
-//             </a>
-//             `
-//         }
-
-//         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
-//     }
-// }
-
-function sortAndShowCategories(sortCriteria, categoriesArray){
-    currentSortCriteria = sortCriteria;
-
-    if(categoriesArray != undefined){
-        currentCategoriesArray = categoriesArray;
-    }
-
-    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-
-    //Muestro las categorías ordenadas
-    showCategoriesList();
-
-}
-
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
+/****************LANZA EL EVENTO LUEGO DE CARGAR EL HTML****************/
 document.addEventListener("DOMContentLoaded", function (e) {
 
+/********FUNCION QUE CONTIENE EL FETCH, NOS TRAEMOS EL JSON COMO ARRAY********/
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
-            sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
+            productosArray = resultObj.data;
+            mostrarListaProd(productosArray);
         }
     });
 
-    document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+/********EVENTO QUE LANZA LA FUNCION CADA VEZ QUE SE TYPEA UNA TECLA********/
+    document.getElementById('filtro').addEventListener('keyup', () => {
+        buscar ();
     });
 
-    document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
+    document.getElementById("ordenarNombre").addEventListener("click", function(){
+        ordenarPorNombre ();
     });
 
-    document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+    document.getElementById("ordenarRelevancia").addEventListener("click", function(){
+        ordenarPorRelevancia ();
     });
 
-    document.getElementById("clearRangeFilter").addEventListener("click", function(){
-        document.getElementById("rangeFilterCountMin").value = "";
-        document.getElementById("rangeFilterCountMax").value = "";
-
-        minCount = undefined;
-        maxCount = undefined;
-
-        showCategoriesList();
+    document.getElementById("ordenarCosto").addEventListener("click", function(){
+        ordenarPorCosto ();
     });
-
-    document.getElementById("rangeFilterCount").addEventListener("click", function(){
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
-        minCount = document.getElementById("rangeFilterCountMin").value;
-        maxCount = document.getElementById("rangeFilterCountMax").value;
-
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
-            minCount = parseInt(minCount);
-        }
-        else{
-            minCount = undefined;
-        }
-
-        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
-            maxCount = parseInt(maxCount);
-        }
-        else{
-            maxCount = undefined;
-        }
-
-        showCategoriesList();
-    });
-
+    
 });
+
+
+
+
+
+
+/*********************************************************************************************************/
+
+
+
+    // document.getElementById("clearRangeFilter").addEventListener("click", function(){
+    //     document.getElementById("precioMinimo").value = "";
+    //     document.getElementById("precioMaximo").value = "";
+
+    //     precioMinimo = undefined;
+    //     precioMaximo = undefined;
+
+    //     mostrarListaProd();
+    // });
+
+    // document.getElementById("filtrarPrecio").addEventListener("click", function(){
+    //     //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+    //     //de productos por categoría.
+    //     precioMinimo = document.getElementById("precioMinimo").value;
+    //     precioMaximo = document.getElementById("precioMaximo").value;
+
+    //     if ((precioMinimo != undefined) && (precioMinimo != "") && (parseInt(precioMinimo)) >= 0){
+    //         precioMinimo = parseInt(precioMinimo);
+    //     }
+    //     else{
+    //         precioMinimo = undefined;
+    //     }
+
+    //     if ((precioMaximo != undefined) && (precioMaximo != "") && (parseInt(precioMaximo)) >= 0){
+    //         precioMaximo = parseInt(precioMaximo);
+    //     }
+    //     else{
+    //         precioMaximo = undefined;
+    //     }
+
+    //     mostrarListaProd();
+    // });
+
+
+

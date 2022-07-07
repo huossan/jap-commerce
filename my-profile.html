@@ -10,13 +10,15 @@
 
   <!-- OAuth de Google -->
   <meta name="google-signin-scope" content="profile email">
-  <meta name="google-signin-client_id" content="994155209935-4he52dbd7l032cm2ou9s6q52ddr4ofjk.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="994155209935-4he52dbd7l032cm2ou9s6q52ddr4ofjk.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <!-- OAuth de Google -->
-  
+
   <title>eMercado - Todo lo que busques está aquí</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <style>
@@ -34,6 +36,61 @@
         font-size: 3.5rem;
       }
     }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #BA68C8
+    }
+
+    .profile-button {
+      background: rgb(99, 39, 120);
+      box-shadow: none;
+      border: none
+    }
+
+    .profile-button:hover {
+      background: #682773
+    }
+
+    .profile-button:focus {
+      background: #682773;
+      box-shadow: none
+    }
+
+    .profile-button:active {
+      background: #682773;
+      box-shadow: none
+    }
+
+    .back:hover {
+      color: #682773;
+      cursor: pointer
+    }
+
+    .labels {
+      font-size: 11px
+    }
+
+    .add-experience:hover {
+      background: #BA68C8;
+      color: #fff;
+      cursor: pointer;
+      border: solid 1px #BA68C8
+    }
+
+    .sinborde {
+      display: block;
+      width: 100%;
+      height: calc(1.5em + 0.75rem + 2px);
+      /* padding: 0.375rem 0.75rem; */
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 0;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -41,36 +98,142 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" href="login.html" onclick="logout ()">Salir</a>
+  <nav class="navbar navbar-expand-md navbar-dark site-header sticky-top py-1 bg-dark">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="index.html">JaP</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion"
+        aria-controls="menuNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="menuNavegacion">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="nickname" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="nickname">
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="cart.html">Ver mi carrito</a></li>
+              <li><a class="dropdown-item" href="login.html" onclick="logout ()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row justify-content-center">
+      <!-- justify-content-center se lo agregue para que quede centrado al quitar lo que estaba a la derecha -->
+
+      <!-- <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><a href="https://imgbb.com/"><img class="rounded-circle mt-5" width="150px" src="https://i.ibb.co/9vYFksQ/Abubis-Royalty-Free-Game-Art-2.jpg" alt="Abubis-Royalty-Free-Game-Art-2"></a>
+          <span class="font-weight-bold" id="tarjeta_nombre">Fulanito de Tall</span><span id="tarjeta_correo" class="text-black-50">ejemplo@mail.com</span><span> </span>
+        </div>
+      </div> -->
+
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <label for="imagen">
+            <input type="file" name="imagen" id="imagen" style="display: none;" accept="image/*">
+            <img id="img" class="rounded-circle mt-5" width="150px" style="cursor: pointer;"
+              src="img/usuario.png" alt="Abubis-Royalty-Free-Game-Art-2">
+          </label>
+          <span class="font-weight-bold" id="tarjeta_nombre">Fulanito de Tall</span>
+          <span id="tarjeta_correo" class="text-black-50">ejemplo@mail.com</span>
+          <span>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Perfil</h4>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Nombre</label><input id="nom" name="nom" type="text"
+                class="sinborde" placeholder="nombre" value="" onkeyup="comprobarBoton()" disabled></div>
+            <div class="col-md-6"><label class="labels">Apellido</label><input id="apell" type="text" class="sinborde"
+                value="" placeholder="apellido" onkeyup="comprobarBoton()" disabled></div>
+            <div class="col-md-9"><label class="labels">Direccion de correo</label><input id="correo" type="text"
+                class="sinborde" placeholder="email" value="" onkeyup="comprobarBoton()" disabled></div>
+            <div class="col-md-3"><label class="labels">Edad</label><input id="edad" type="number" min="0" max="120"
+                class="sinborde" placeholder="años" value="" onkeyup="comprobarBoton()" disabled></div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12"><label class="labels">Telefono de Contacto</label><input id="cel" type="text"
+                class="sinborde" placeholder="numero" value="" onkeyup="comprobarBoton()" disabled></div>
+            <div class="col-md-12"><label class="labels">Direccion</label><input id="dir" type="text" class="sinborde"
+                placeholder="calle y nro. de puerta" value="" onkeyup="comprobarBoton()" disabled></div>
+            <div class="col-md-12"><label class="labels">Ciudad</label><input id="ciud" type="text" class="sinborde"
+                placeholder="ciudad" value="" onkeyup="comprobarBoton()" disabled></div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="labels">Pais</label><input id="pais" type="text" class="sinborde" placeholder="país"
+                value="" onkeyup="comprobarBoton()" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="labels">Departamento</label><input id="dpto" type="text" class="sinborde" value=""
+                placeholder="dpto." onkeyup="comprobarBoton()" disabled>
+            </div>
+          </div>
+
+          <div class="mt-5 text-center">
+            <button id="boton1" class="btn btn-success profile-button" type="button">Editar Perfil</button>
+          </div>
+
+          <div class="mt-5 text-center">
+            <button id="boton2" class="btn btn-primary profile-button invisible" type="button">Guardar Perfil</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span
+              class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+          <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text"
+              class="form-control" placeholder="experience" value=""></div> <br>
+          <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control"
+              placeholder="additional details" value=""></div>
+        </div>
+      </div> -->
+
     </div>
   </div>
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
   <div class="alert fade alert-success" role="alert" id="alertResult">
     <span id="resultSpan"></span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -79,8 +242,12 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>

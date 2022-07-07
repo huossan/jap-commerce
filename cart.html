@@ -7,9 +7,11 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  <script src="https://kit.fontawesome.com/fc84f4ec0a.js" crossorigin="anonymous"></script>
   <title>eMercado - Todo lo que busques está aquí</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <style>
@@ -27,6 +29,14 @@
         font-size: 3.5rem;
       }
     }
+
+    .cantidad {
+      color: gray;
+    }
+
+    #cargando {
+      display: none;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -34,23 +44,312 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+  <nav class="navbar navbar-expand-md navbar-dark site-header sticky-top py-1 bg-dark">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="index.html">JaP</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion"
+        aria-controls="menuNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="menuNavegacion">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="nickname" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="nickname">
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="cart.html">Ver mi carrito</a></li>
+              <li><a class="dropdown-item" href="login.html" onclick="logout ()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <main>
+    <div class="container-md">
+      <div class="row m-2 p-2">
+
+        <div class="col-9 shadow border border-warning rounded-3 m-2">
+          <div class="row mt-3">
+            <div class="col">
+              <h2 class="d-flex justify-content-center mb-3">Realizar Compra</h2>
+              <form id="procesar-pago" action="#">
+                <div class="form-group row">
+                  <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                  <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                  <div class="col-12 col-md-10">
+                    <input type="email" class="form-control" id="correo" placeholder="Ingresa tu correo" required>
+                  </div>
+                </div>
+
+                <div id="carrito" class="table-responsive">
+                  <table class="table" id="lista-compra">
+                    <thead>
+                      <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col"></th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Sub Total</th>
+                        <th scope="col">Borrar</th>
+                      </tr>
+
+                    </thead>
+                    <tbody id="lista-pre-cargados">
+
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" id="loaders">
+              <img id="cargando" src="img/cargando.gif" width="220">
+            </div>
+            </form>
+
+
+          </div>
+        </div>
+
+        <div class="col shadow border border-warning rounded-3 m-2">
+
+          <div class="m-2 p-2">
+
+            <h4 class="d-flex justify-content-center mb-3">Envío</h5>
+              <div class="form-check">
+                <input class="costo_envio" type="radio" name="exampleRadios" id="exampleRadios1" onclick="sumar()"
+                  value="0.15" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                  Premium 2 a 5 días 15%
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="costo_envio" type="radio" name="exampleRadios" id="exampleRadios2" onclick="sumar()"
+                  value="0.07">
+                <label class="form-check-label" for="exampleRadios2">
+                  Expres 5 a 8 días 7%
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="costo_envio" type="radio" name="exampleRadios" id="exampleRadios3" onclick="sumar()"
+                  value="0.05">
+                <label class="form-check-label" for="exampleRadios3">
+                  Standard 12 a 15 días 5%
+                </label>
+              </div>
+
+          </div>
+
+          <div class="m-2 p-2 row">
+
+            <!-- Button trigger modal -->
+            <div id="" class="alert-warning rounded-3" role="">
+              Forma de pago:
+            </div>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <span id="forma_de_pago">Seleccione...</span>
+            </button>
+            <br>
+            <br>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio1"
+                        value="Tarjeta de Credito" checked>
+                      <label class="form-check-label" for="radio1">
+                        Tarjeta de credito
+                      </label>
+                      <br>
+                      <div class="">
+                        <label for="tarjeta_numero">Numero de tarjeta</label>
+                        <input type="text" name="" id="" class="d-flex">
+                      </div>
+                      <div>
+                        <label for="tarjeta_clave">Clave seguridad</label>
+                        <input type="text" name="" id="" class="d-flex">
+                      </div>
+                      <div>
+                        <label for="tarjeta_clave">Vencimiento</label>
+                        <input type="date" name="" id="" class="d-flex">
+                      </div>
+                      <br>
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio2"
+                        value="Transferencia bancaria">
+                      <label class="form-check-label" for="radio2">
+                        Transferencia bancaria
+                      </label>
+                      <div class="">
+                        <label for="tarjeta_numero">Numero de cuenta</label>
+                        <input type="text" name="" id="" class="d-flex">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="sleccionar_metodo" type="button" class="btn btn-primary"
+                      onclick="metodoDePago()">Aplicar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col m-2 p-2">
+            <ol class="list-group list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subtotal</div>
+
+                </div>
+                <span class="badge bg-primary rounded-pill" id="total_sin_envio"></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Envío</div>
+
+                </div>
+                <span class="badge bg-primary rounded-pill" id="costo_de_envio"></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Total</div>
+
+                </div>
+                <span class="badge bg-primary rounded-pill" id="total_con_envio"></span>
+              </li>
+            </ol>
+          </div>
+
+
+        </div>
+
+        <h2 class="d-flex justify-content-center mb-3">Datos de Envio</h2>
+        <form class="row g-3 needs-validation" novalidate>
+          <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="validationCustom01" value="" placeholder="nombre" required>
+            <div class="valid-feedback">Correcto!</div>
+            <div class="invalid-feedback">Debe completar!</div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="validationCustom02" value="" placeholder="apellido" required>
+            <div class="valid-feedback">Correcto!</div>
+            <div class="invalid-tooltip">Debe completar!</div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">E-mail</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend">@</span>
+              <input type="email" class="form-control" id="validationCustomUsername"
+                aria-describedby="inputGroupPrepend" required>
+              <div class="invalid-feedback">Ingrese un correo válido</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label">Dirección de envío</label>
+            <input type="text" class="form-control" id="validationCustom03" required>
+            <div class="invalid-feedback">Debe ingresar una dirección</div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom05" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="validationCustom05" required>
+            <div class="invalid-feedback">Debe ingresar una ciudad</div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">Departamento</label>
+            <select class="form-select" id="validationCustom04" required>
+              <option selected disabled value="">Seleccione...</option>
+              <option>Artigas</option>
+              <option>Canelones</option>
+              <option>Cerro Largo</option>
+              <option>Colonia</option>
+              <option>Durazno</option>
+              <option>Flores</option>
+              <option>Florida</option>
+              <option>Lavalleja</option>
+              <option>Maldonado</option>
+              <option>Montevideo</option>
+              <option>Paysandú</option>
+              <option>Río Negro</option>
+              <option>Rivera</option>
+              <option>Rocha</option>
+              <option>Salto</option>
+              <option>San José</option>
+              <option>Soriano</option>
+              <option>Tacuarembó</option>
+              <option>Treinta y tres</option>
+            </select>
+            <div class="invalid-feedback">Debe seleccionar un departamento</div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+              <label class="form-check-label" for="invalidCheck">
+                Aceptar los términos y condiciones
+              </label>
+              <div class="invalid-feedback">
+                Debe aceptar los términos y condiciones
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="row justify-content-between">
+            <div class="col">
+              <button class="btn btn-warning btn-block fw-bold" id="procesar-compra">Realizar compra</button>
+            </div>
+          </div>
+        </form>
+
+  </main>
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
+  </footer>
+
+  <div class="alert fade alert-success" role="alert" id="alertResult">
+    <span id="resultSpan"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -59,11 +358,43 @@
       <div></div>
     </div>
   </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/logout.js"></script>
+  <!-- <script src="js/my-profile.js"></script> -->
+  <script>
+    let nickname = JSON.parse(localStorage.getItem('Usuario'));
+    document.getElementById('nickname').innerHTML = nickname.nombre;
+  </script>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 </body>
 
 </html>

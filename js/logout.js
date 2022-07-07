@@ -1,6 +1,7 @@
 function logout () {
 
-    localStorage.clear (); //Borra el LocalStorage
+    localStorage.removeItem('Usuario');
+   // localStorage.clear (); //Borra el LocalStorage
     signOut (); //Funcion de desconectar de Google
 };
 
